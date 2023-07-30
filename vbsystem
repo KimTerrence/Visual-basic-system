@@ -1,1 +1,244 @@
+'DEVELOPER---Kim Terrence Quines---Guiellie Keit Lorenzo---Rieza Baclig'
 
+'-----------------------------------------------F L I G H T  R E S E R V A T I O N  S Y S T E M-----------------------'
+
+Public Partial Class MainForm
+    
+    WithEvents	Dim btn_save As New Button
+    WithEvents Dim btn_remove As New Button
+    
+    Dim lbl_tt As New Label    
+    Dim lbl_ln As New Label
+    Dim lbl_fn As New Label
+    Dim lbl_mn As New Label
+    Dim lbl_pn As New Label
+    Dim lbl_class As New Label
+    Dim lbl_desti As New Label
+    Dim lbl_from As New Label
+    Dim lbl_to As New Label
+    Dim lbl_seat As New Label
+  	Dim lbl_gender As New Label
+    
+    Dim class_cb As New ComboBox
+    Dim pn_cb As New ComboBox
+    Dim from_cb As New ComboBox
+    Dim to_cb As New Combobox
+    Dim seat_cb As New ComboBox
+    Dim gender_cb As New ComboBox
+    
+    Dim tbx_ln As New TextBox
+    Dim tbx_fn As New TextBox
+    Dim tbx_mn As New TextBox
+    
+    Dim rb_oneway As New RadioButton
+    Dim rb_roundtrip As New RadioButton
+    
+    Dim idx As New Integer
+    
+   	WithEvents Dim selected As DataGridViewRow
+    
+    Public Dim grid As new DataGridView
+
+    
+    Public Sub New()
+        
+        Me.InitializeComponent()
+        Me.SuspendLayout
+        '-----------------------------form-----------------------------'
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.BackColor = System.Drawing.Color.White
+        Me.ClientSize = New System.Drawing.Size(1081, 613)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
+        Me.text = "Flight Reservation"
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
+        
+        '-----------------------------title label-----------------------------'
+        Me.Controls.Add(lbl_tt)
+        lbl_tt.Text = "Flight Reservation"
+        lbl_tt.BackColor = System.Drawing.Color.black
+        lbl_tt.Font = New System.Drawing.Font("Goudy Stout", 15!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        lbl_tt.ForeColor = System.Drawing.Color.white
+        lbl_tt.Location = New System.Drawing.Point(-1, -2)
+        lbl_tt.Name = "lbl_tt"
+        lbl_tt.Size = New System.Drawing.Size(1083, 60)
+        lbl_tt.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        
+        
+        '-----------------------------Last name label-----------------------------'
+        Me.Controls.Add(lbl_ln)
+        lbl_ln.Text = " Last Name"
+        lbl_ln.Location = New Drawing.Point(21, 83)
+        
+        Me.Controls.Add(tbx_ln)
+        tbx_ln.Location = New Drawing.Point(21, 112)
+        tbx_ln.Size = New Drawing.Size(267, 20)
+    
+        '-----------------------------First name label-----------------------------'
+        Me.Controls.Add(lbl_fn)
+        lbl_fn.Text = " First Name"
+        lbl_fn.Location = New Drawing.Point(21, 144)
+        
+        Me.Controls.Add(tbx_fn)
+        tbx_fn.Location = New Drawing.Point(21, 179)
+        tbx_fn.Size = New Drawing.Size(267, 20)
+        
+        '-----------------------------Middle name label-----------------------------'
+        Me.Controls.Add(lbl_mn)
+        lbl_mn.Text = " Middle Name Name"
+        lbl_mn.Location = New Drawing.Point(21, 211)
+
+        Me.Controls.Add(tbx_mn)
+        tbx_mn.Location = New Drawing.Point(21, 242)
+        tbx_mn.Size = New Drawing.Size(267, 20)
+        
+        '-----------------------gender-------------------------'
+        Me.Controls.Add(lbl_gender)
+        lbl_gender.Text = "Gender" 
+        lbl_gender.Location = New Drawing.Point(132, 83)
+        lbl_gender.Size = New Drawing.Size(63, 19)
+        
+        Me.Controls.Add(gender_cb)
+        gender_cb.Items.AddRange(New Object() {"male", "female"})
+        gender_cb.Location = New Drawing.Point(201, 83)
+        gender_cb.Size = New Drawing.Size(87, 21)
+        
+        '-----------------------------plane num label-----------------------------'
+        Me.Controls.Add(lbl_pn)
+        lbl_pn.Text = "Plane Number"
+        lbl_pn.Location = New System.Drawing.Point(21, 287)
+        
+        Me.Controls.Add(pn_cb)
+        pn_cb.Location = New Drawing.Point(21, 325)
+        pn_cb.Size = New Drawing.Size(129, 21)
+        pn_cb.Items.AddRange(New Object() {"Plane 1", "Plane 2", "Plane 3", "Plane 4", "Plane 5", "Plane 6", "Plane 7", "Plane 8", "Plane 9", "Plane 10"})
+        
+        
+        '-----------------------------classlabel-----------------------------'
+        Me.Controls.Add(lbl_class)
+        lbl_class.Text = "Class"
+        lbl_class.Location = New Drawing.Point(151, 287)
+        
+        Me.Controls.Add(class_cb)
+        class_cb.Location = New Drawing.Point(159, 325)
+        class_cb.Size = New Drawing.Size(129, 21)
+        class_cb.Items.AddRange(New Object() {"First Class", "Bussines Class" , "Economy Class"})
+        
+        
+        '-----------------------------destinatiom label-----------------------------'
+        Me.Controls.Add(lbl_desti)
+        lbl_desti.Text = " Destination"
+        lbl_desti.Location = New Drawing.Point(21, 358)
+        
+        
+        '-----------------------------from label-----------------------------'
+        Me.Controls.Add(lbl_from)
+        lbl_from.Text = "From"
+        lbl_from.Location = New Drawing.Point(21, 381)
+        lbl_from.Size = New Drawing.Size(27, 20)
+        
+        Me.Controls.Add(from_cb)
+        from_cb.Location = New Drawing.Point(54, 381)
+        from_cb.Size = New Drawing.Size(78, 20)
+        from_cb.Items.AddRange(New Object() {"Philipinnes"})
+        '-----------------------------to label-----------------------------'
+        Me.Controls.Add(lbl_to)
+        lbl_to.Text = "To"
+        lbl_to.Location = New Drawing.Point(151, 384)
+        lbl_to.Size = New Drawing.Size(44, 17)
+        
+        Me.Controls.Add(to_cb)
+        to_cb.Items.AddRange(New Object() {"United States", "Australia", "Thailand", "India", "Qatar", "Peru", "China", "Japan", "Korea"})
+        to_cb.Location = New Drawing.Point(201, 380)
+        to_cb.Size = New Drawing.Size(87, 21)
+        
+        '-----------------seat lbl-----------------------'
+        Me.Controls.Add(lbl_seat)
+        lbl_seat.Text = "Seat Number"
+        lbl_seat.Location = New Drawing.Point(21, 417)
+        
+        Me.Controls.Add(seat_cb)
+        seat_cb.Location = New Drawing.Point(20, 440)
+        seat_cb.Items.AddRange(New Object() {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25"})
+        
+        '-------------------oneway-----'
+        Me.Controls.Add(rb_oneway)
+        rb_oneway.Text = "One-Way"
+        rb_oneway.Location = New Drawing.Point(159, 416)
+        
+        '---------------roundtrip-----------'
+        Me.Controls.Add(rb_roundtrip)
+        rb_roundtrip.Text = "Round-Trip"
+        rb_roundtrip.Location = New Drawing.Point(159, 454)
+        
+        'botton----------------------------------------------------------'
+        Me.Controls.Add(btn_save)
+        btn_save.Text = "Save"
+        btn_save.Location = New Drawing.Point(140, 508)
+        btn_save.Size = New Drawing.Size(157, 32)
+        
+        '----------------remove btn----------------------'
+        Me.Controls.Add(btn_remove)
+        btn_remove.Text = "REMOVE"
+        btn_remove.Size = New Drawing.Size(119, 32)
+        btn_remove.Location = New Drawing.Point(13, 508)
+        
+        'grid----------------------------'
+      	me.controls.add(grid)
+        me.grid.readonly = true
+   		me.grid.Location = New Drawing.Point(317, 83)
+        me.grid.Size = New Drawing.Size(744, 502)
+        
+        me.grid.columns.add("0", "Last Name")
+         me.grid.columns.add("1", "First Name")
+         Me.grid.columns.add("2", "Middle Name")
+         Me.grid.Columns.Add("3", "Gender")
+           me.grid.columns.add("4", "Plane Number")
+            me.grid.columns.add("5", "Class")
+            Me.grid.columns.add("6", "From")
+            Me.grid.Columns.Add("7", "To")
+            Me.grid.Columns.Add("8", "Seat")
+             Me.grid.Columns.Add("9", "Type")
+    End Sub
+    
+    Sub btn_saveclick(sender As Object,e As EventArgs) Handles btn_save.Click
+    	
+    	
+    	grid.rows.add(tbx_ln.text, tbx_fn.text, tbx_mn.text,gender_cb.Text, pn_cb.text, class_cb.text, from_cb.text, to_cb.text, seat_cb.Text, rb_roundtrip.Text, rb_oneway.Text)
+    	msgbox(tbx_fn.text + "! You have been sucessfully reserved your flight")
+    	tbx_ln.Clear
+    	tbx_fn.Clear
+    	tbx_mn.Clear
+    	pn_cb.ResetText
+    	class_cb.ResetText
+    	from_cb.ResetText
+    	to_cb.ResetText
+    	seat_cb.ResetText
+    	gender_cb.ResetText
+
+    End Sub
+    
+    Sub gridclick(sender As Object, e As DataGridViewCellEventArgs)
+    	idx = e.RowIndex
+    	selected = grid.Rows(idx)
+    	
+    	tbx_ln.Text =  selected.Cells(0).Value.ToString
+    	tbx_fn.Text =  selected.Cells(1).Value.ToString
+    	tbx_mn.Text =  selected.Cells(2).Value.ToString
+    	gender_cb.Text =  selected.Cells(3).Value.ToString
+    	pn_cb.Text =  selected.Cells(4).Value.ToString
+    	class_cb.Text =  selected.Cells(5).Value.ToString
+    	from_cb.Text =  selected.Cells(6).Value.ToString
+    	to_cb.Text =  selected.Cells(7).Value.ToString
+    	seat_cb.Text =  selected.Cells(😎.Value.ToString
+    	rb_roundtrip.Text =  selected.Cells(9).Value.ToString
+    	rb_oneway.Text =  selected.Cells(10).Value.ToString
+    	
+   end Sub
+    Sub btn_removeClick(sender As Object, e As EventArgs) Handles btn_remove.Click
+    	
+    	grid.Rows.RemoveAt(idx)
+    	MsgBox ("REMOVED!")
+    End Sub
+End Class
